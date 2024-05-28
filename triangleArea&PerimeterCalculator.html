@@ -1,0 +1,71 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Area and Perimeter of a Traingle Using Heron's Formula</title>
+        <style>
+            #container{
+                background-color: grey;
+                width: 30%;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <label>Traingle Area and Perimeter Calculator Using Heron's Formula</label><br><br>
+            <label>SideA</label>
+            <input type="text" id="txtSideA" value="0"/><br><br>
+            <label>SideB</label>
+            <input type="text" id="txtSideB" value="0"/><br><br>
+            <label>SideC</label>
+            <input type="text" id="txtSideC" value="0"/><br><br>
+            <input type="button"  value="calculate" onclick="calculate()"/>
+            <input type="button"  value="reset" onclick="reset()"/><br><br>
+            
+            
+
+         <span id="spn"></span>
+
+        
+
+        </div>
+        <script type="text/javascript">
+            function calculate() {
+    var sideA = Number(document.getElementById("txtSideA").value);
+    var sideB = Number(document.getElementById("txtSideB").value);
+    var sideC = Number(document.getElementById("txtSideC").value);
+    var area = calculateCircleProperties(sideA,sideB,sideC, 'area');
+    var perimeter = calculateCircleProperties(sideA,sideB,sideC, 'perimeter');
+
+    document.getElementById("spn").innerHTML = "Area of a Traingle: " + area + "<br>Perimeter of a Traingle: " + perimeter;
+}
+
+function calculateCircleProperties(sideA,sideB,sideC, properties) {
+    var S = (sideA + sideB + sideC) / 2;
+
+switch (properties) {
+    case 'area':
+         return Math.sqrt(S * (S - sideA) * (S - sideB) * (S- sideC));
+
+    case 'perimeter':
+        return (sideA + sideB + sideC);
+        break;
+    default:
+        console.log('Invalid properties. Please choose "area" or "perimeter".');
+
+}
+}
+
+function reset()
+{
+    document.getElementById("txtSideA").value="0";
+    document.getElementById("txtSideB").value="0";
+    document.getElementById("txtSideC").value="0";
+
+}
+
+            
+
+        </script>
+    </body>
+</html>

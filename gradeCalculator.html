@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Grade Calculator</title>
+    <style>
+        #container {
+            background-color:lightgray;
+            width: 30%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Grade Calculator</h1><br>
+        <label>Enter Your Score </label>
+        <input type="number" id="score" value="0" /><br><br>
+        <input type="button" value="calculate" onclick="calculate()" />
+        <input type="button" value="reset" onclick="reset()" /><br><br>
+
+        <span id="spn"></span>
+    </div>
+
+    <script type="text/javascript">
+        function calculate() {
+            var score = Number(document.getElementById("score").value);
+            var result = calculateGrade(score);
+
+            document.getElementById("spn").innerHTML = "Grade: " + result.Grade + "<br>Points: " + result.Points;
+        }
+
+        function calculateGrade(score) {
+            var Grade;
+            var Points;
+
+            switch (true) {
+                case score > 90:
+                    Grade = 'S';
+                    Points = 10;
+                    break;
+
+                case score > 80 && score <= 90:
+                    Grade = 'A';
+                    Points = 9;
+                    break;
+
+                case score > 70 && score <= 80:
+                    Grade = 'B';
+                    Points = 8;
+                    break;
+
+                case score > 60 && score <= 70:
+                    Grade = 'C';
+                    Points = 7;
+                    break;
+
+                case score > 50 && score <= 60:
+                    Grade = 'D';
+                    Points = 6;
+                    break;
+
+                case score > 40 && score <= 50:
+                    Grade = 'E';
+                    Points = 5;
+                    break;
+
+                case score <= 40:
+                    Grade = 'F';
+                    Points = 0;
+                    break;
+
+                default:
+                    console.log("Score is Invalid");
+            }
+
+            return {
+                Grade: Grade,
+                Points: Points
+            }
+        }
+
+        function reset()
+{
+    document.getElementById("score").value="0";
+
+}
+    </script>
+
+</body>
+
+</html>

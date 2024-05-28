@@ -1,0 +1,55 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Area and Perimeter of a Square</title>
+        <style>
+            #container{
+                background-color: grey;
+                width: 30%;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <label>Square Area and Perimeter Calculator</label><br><br>
+            <label>sideLength : </label>
+            <input type="text" id="txtsideLength" value="0"/><br><br>
+            <input type="button"  value="calculate" onclick="calculate()"/>
+            <input type="button"  value="reset" onclick="reset()"/><br><br>
+            
+            
+
+         <span id="spn"></span>
+
+        
+
+        </div>
+        <script type="text/javascript">
+            function calculate() {
+    var sideLength = Number(document.getElementById("txtsideLength").value);
+    var area = calculateSquareProperties(sideLength, 'area');
+    var perimeter = calculateSquareProperties(sideLength, 'perimeter');
+
+    document.getElementById("spn").innerHTML = "Area of a Square: " + area + "<br>Perimeter of a Square: " + perimeter;
+}
+
+function calculateSquareProperties(sideLength, properties) {
+    switch (properties) {
+        case 'area':
+            return sideLength*sideLength;
+        case 'perimeter':
+            return 4*sideLength;
+        default:
+            return 'Invalid option';
+    }
+}
+
+function reset()
+{
+    document.getElementById("txtsideLength").value="0";
+
+}
+     </script>
+    </body>
+</html>

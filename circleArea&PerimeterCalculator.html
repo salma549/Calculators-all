@@ -1,0 +1,55 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Area and Perimeter of a Circle Calculator</title>
+        <style>
+            #container{
+                background-color: grey;
+                width: 30%;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <label>Circle Area and Perimeter Calculator</label><br><br>
+            <label>Radius : </label>
+            <input type="text" id="txtRadius" value="0"/><br><br>
+            <input type="button"  value="calculate" onclick="calculate()"/>
+            <input type="button"  value="reset" onclick="reset()"/><br><br>
+            
+
+         <span id="spn"></span>
+
+        
+
+        </div>
+        <script type="text/javascript">
+            function calculate() {
+    var radius = Number(document.getElementById("txtRadius").value);
+    var area = calculateCircleProperties(radius, 'area');
+    var perimeter = calculateCircleProperties(radius, 'perimeter');
+
+    document.getElementById("spn").innerHTML = "Area of a Circle: " + area + "<br>Perimeter of a Circle: " + perimeter;
+}
+
+function calculateCircleProperties(radius, properties) {
+    switch (properties) {
+        case 'area':
+            return Math.PI * radius*radius;
+        case 'perimeter':
+            return 2 * Math.PI * radius;
+        default:
+            return 'Invalid option';
+    }
+}
+function reset()
+{
+    document.getElementById("txtRadius").value="0";
+
+}
+
+
+        </script>
+    </body>
+</html>

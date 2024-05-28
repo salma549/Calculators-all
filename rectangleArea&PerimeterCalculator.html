@@ -1,0 +1,63 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Area and Perimeter of a Square</title>
+        <style>
+            #container{
+                background-color: grey;
+                width: 30%;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <label>Rectangle Area and Perimeter Calculator</label><br><br>
+            <label>Length : </label><br><br>
+            <input type="text" id="txtLength" value="0" /><br><br>
+            <label>Width : </label><br><br>
+            <input type="text" id="txtWidth" value="0" /><br><br>
+            <input type="button"  value="calculate" onclick="calculate()"/>
+            <input type="button"  value="reset" onclick="reset()"/><br><br>
+            
+            
+
+         <span id="spn"></span>
+
+        
+
+        </div>
+        <script type="text/javascript">
+            function calculate() {
+    var Length= Number(document.getElementById("txtLength").value);
+    var Width= Number(document.getElementById("txtWidth").value);
+    var area = calculateRectangleProperties(Length,Width,'area');
+    var perimeter = calculateRectangleProperties(Length,Width, 'perimeter');
+
+    document.getElementById("spn").innerHTML = "Area of a Square: " + area + "<br>Perimeter of a Square: " + perimeter;
+}
+
+function calculateRectangleProperties(Length,Width, properties) {
+    switch (properties) {
+        case 'area':
+            return Length*Width;
+        case 'perimeter':
+            return 2*(Length+Width);
+        default:
+            return 'Invalid option';
+    }
+}
+function reset()
+{
+    document.getElementById("txtLength").value="0";
+    document.getElementById("txtWidth").value="0";
+
+}
+
+
+
+            
+
+        </script>
+    </body>
+</html>
