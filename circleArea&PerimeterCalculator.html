@@ -1,55 +1,161 @@
-<!Doctype html>
-<html>
-    <head>
-        <title>Area and Perimeter of a Circle Calculator</title>
-        <style>
-            #container{
-                background-color: grey;
-                width: 30%;
-                padding: 10px;
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #2193b0, #6dd5ed);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        #container:hover {
+            transform: scale(1.05);
+        }
+
+        label {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #2193b0;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6dd5ed;
+        }
+
+        input[type="button"] {
+            background: #2193b0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background: #6dd5ed;
+        }
+
+        #spn {
+            display: block;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            #container {
+                width: 90%;
+                padding: 15px;
             }
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <label>Circle Area and Perimeter Calculator</label><br><br>
-            <label>Radius : </label>
-            <input type="text" id="txtRadius" value="0"/><br><br>
-            <input type="button"  value="calculate" onclick="calculate()"/>
-            <input type="button"  value="reset" onclick="reset()"/><br><br>
-            
 
-         <span id="spn"></span>
+            label {
+                font-size: 1rem;
+            }
 
-        
+            input[type="button"] {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
 
-        </div>
-        <script type="text/javascript">
-            function calculate() {
-    var radius = Number(document.getElementById("txtRadius").value);
-    var area = calculateCircleProperties(radius, 'area');
-    var perimeter = calculateCircleProperties(radius, 'perimeter');
+            #spn {
+                font-size: 0.9rem;
+            }
+        }
 
-    document.getElementById("spn").innerHTML = "Area of a Circle: " + area + "<br>Perimeter of a Circle: " + perimeter;
-}
+        @media (max-width: 480px) {
+            label {
+                font-size: 0.9rem;
+            }
 
-function calculateCircleProperties(radius, properties) {
-    switch (properties) {
-        case 'area':
-            return Math.PI * radius*radius;
-        case 'perimeter':
-            return 2 * Math.PI * radius;
-        default:
-            return 'Invalid option';
-    }
-}
-function reset()
-{
-    document.getElementById("txtRadius").value="0";
+            input[type="button"] {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
 
-}
+            #spn {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <label>Circle Area and Perimeter Calculator</label><br>
+        <label for="txtRadius">Radius:</label>
+        <input type="text" id="txtRadius" value="0"><br>
+        <input type="button" value="Calculate" onclick="calculate()">
+        <input type="button" value="Reset" onclick="reset()"><br>
+        <span id="spn"></span>
+    </div>
 
+    <script>
+        function calculate() {
+            var radius = Number(document.getElementById("txtRadius").value);
+            var area = calculateCircleProperties(radius, 'area');
+            var perimeter = calculateCircleProperties(radius, 'perimeter');
 
-        </script>
-    </body>
+            document.getElementById("spn").innerHTML = 
+                `<strong>Area of Circle:</strong> ${area.toFixed(2)} <br> 
+                <strong>Perimeter of Circle:</strong> ${perimeter.toFixed(2)}`;
+        }
+
+        function calculateCircleProperties(radius, properties) {
+            switch (properties) {
+                case 'area':
+                    return Math.PI * radius * radius;
+                case 'perimeter':
+                    return 2 * Math.PI * radius;
+                default:
+                    return 'Invalid option';
+            }
+        }
+
+        function reset() {
+            document.getElementById("txtRadius").value = "0";
+            document.getElementById("spn").innerHTML = "";
+        }
+    </script>
+</body>
 </html>
+
