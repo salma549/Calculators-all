@@ -1,55 +1,168 @@
-<!Doctype html>
-<html>
-    <head>
-        <title>Area and Perimeter of a Square</title>
-        <style>
-            #container{
-                background-color: grey;
-                width: 30%;
-                padding: 10px;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Area and Perimeter Calculator</title>
+    <style>
+        /* Global Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container Styling */
+        #container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            color: #6a11cb;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #6a11cb;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2575fc;
+        }
+
+        /* Button Styling */
+        input[type="button"] {
+            background-color: #6a11cb;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 5px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #2575fc;
+            transform: scale(1.05);
+        }
+
+        /* Output Span */
+        #spn {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
             }
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <label>Square Area and Perimeter Calculator</label><br><br>
-            <label>sideLength : </label>
-            <input type="text" id="txtsideLength" value="0"/><br><br>
-            <input type="button"  value="calculate" onclick="calculate()"/>
-            <input type="button"  value="reset" onclick="reset()"/><br><br>
-            
-            
 
-         <span id="spn"></span>
+            input[type="button"] {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+            }
 
-        
+            #spn {
+                font-size: 0.9rem;
+            }
+        }
 
-        </div>
-        <script type="text/javascript">
-            function calculate() {
-    var sideLength = Number(document.getElementById("txtsideLength").value);
-    var area = calculateSquareProperties(sideLength, 'area');
-    var perimeter = calculateSquareProperties(sideLength, 'perimeter');
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+            }
 
-    document.getElementById("spn").innerHTML = "Area of a Square: " + area + "<br>Perimeter of a Square: " + perimeter;
-}
+            input[type="button"] {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
 
-function calculateSquareProperties(sideLength, properties) {
-    switch (properties) {
-        case 'area':
-            return sideLength*sideLength;
-        case 'perimeter':
-            return 4*sideLength;
-        default:
-            return 'Invalid option';
-    }
-}
+            #spn {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
 
-function reset()
-{
-    document.getElementById("txtsideLength").value="0";
+<body>
+    <div id="container">
+        <h1>Square Calculator</h1>
+        <label for="txtsideLength">Side Length:</label>
+        <input type="text" id="txtsideLength" value="0" />
+        <input type="button" value="Calculate" onclick="calculate()" />
+        <input type="button" value="Reset" onclick="reset()" />
+        <span id="spn"></span>
+    </div>
 
-}
-     </script>
-    </body>
+    <script>
+        function calculate() {
+            var sideLength = Number(document.getElementById("txtsideLength").value);
+            var area = calculateSquareProperties(sideLength, 'area');
+            var perimeter = calculateSquareProperties(sideLength, 'perimeter');
+
+            document.getElementById("spn").innerHTML =
+                `<strong>Area:</strong> ${area} <br> <strong>Perimeter:</strong> ${perimeter}`;
+        }
+
+        function calculateSquareProperties(sideLength, properties) {
+            switch (properties) {
+                case 'area':
+                    return sideLength * sideLength;
+                case 'perimeter':
+                    return 4 * sideLength;
+                default:
+                    return 'Invalid option';
+            }
+        }
+
+        function reset() {
+            document.getElementById("txtsideLength").value = "0";
+            document.getElementById("spn").innerHTML = "";
+        }
+    </script>
+</body>
+
 </html>
