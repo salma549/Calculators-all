@@ -1,34 +1,150 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade Calculator</title>
     <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container Styling */
         #container {
-            background-color:lightgray;
-            width: 30%;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        #container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #0072ff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Input Styling */
+        input[type="number"] {
+            width: calc(100% - 20px);
             padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #00c6ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #0072ff;
+        }
+
+        /* Button Styling */
+        input[type="button"] {
+            background-color: #0072ff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 5px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #00c6ff;
+            transform: scale(1.05);
+        }
+
+        /* Output Span */
+        #spn {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            input[type="button"] {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+            }
+
+            #spn {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+
+            input[type="button"] {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
+
+            #spn {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <h1>Grade Calculator</h1><br>
-        <label>Enter Your Score </label>
-        <input type="number" id="score" value="0" /><br><br>
-        <input type="button" value="calculate" onclick="calculate()" />
-        <input type="button" value="reset" onclick="reset()" /><br><br>
-
+        <h1>Grade Calculator</h1>
+        <label for="score">Enter Your Score:</label>
+        <input type="number" id="score" value="0" min="0" max="100" /><br>
+        <input type="button" value="Calculate" onclick="calculate()" />
+        <input type="button" value="Reset" onclick="reset()" />
         <span id="spn"></span>
     </div>
 
-    <script type="text/javascript">
+    <script>
         function calculate() {
             var score = Number(document.getElementById("score").value);
             var result = calculateGrade(score);
 
-            document.getElementById("spn").innerHTML = "Grade: " + result.Grade + "<br>Points: " + result.Points;
+            document.getElementById("spn").innerHTML =
+                `<strong>Grade:</strong> ${result.Grade} <br> <strong>Points:</strong> ${result.Points}`;
         }
 
         function calculateGrade(score) {
@@ -72,22 +188,18 @@
                     break;
 
                 default:
-                    console.log("Score is Invalid");
+                    console.log("Invalid Score");
             }
 
-            return {
-                Grade: Grade,
-                Points: Points
-            }
+            return { Grade: Grade, Points: Points };
         }
 
-        function reset()
-{
-    document.getElementById("score").value="0";
-
-}
+        function reset() {
+            document.getElementById("score").value = "0";
+            document.getElementById("spn").innerHTML = "";
+        }
     </script>
-
 </body>
 
 </html>
+
