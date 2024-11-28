@@ -1,63 +1,176 @@
-<!Doctype html>
-<html>
-    <head>
-        <title>Area and Perimeter of a Square</title>
-        <style>
-            #container{
-                background-color: grey;
-                width: 30%;
-                padding: 10px;
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Area and Perimeter</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container Styling */
+        #container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        #container:hover {
+            transform: scale(1.05);
+        }
+
+        label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        h1 {
+            color: #ff7e5f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ff7e5f;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #feb47b;
+        }
+
+        /* Button Styling */
+        input[type="button"] {
+            background-color: #ff7e5f;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin: 5px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #feb47b;
+            transform: scale(1.05);
+        }
+
+        /* Output Span */
+        #spn {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
             }
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <label>Rectangle Area and Perimeter Calculator</label><br><br>
-            <label>Length : </label><br><br>
-            <input type="text" id="txtLength" value="0" /><br><br>
-            <label>Width : </label><br><br>
-            <input type="text" id="txtWidth" value="0" /><br><br>
-            <input type="button"  value="calculate" onclick="calculate()"/>
-            <input type="button"  value="reset" onclick="reset()"/><br><br>
-            
-            
 
-         <span id="spn"></span>
+            input[type="button"] {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+            }
 
-        
+            #spn {
+                font-size: 0.9rem;
+            }
+        }
 
-        </div>
-        <script type="text/javascript">
-            function calculate() {
-    var Length= Number(document.getElementById("txtLength").value);
-    var Width= Number(document.getElementById("txtWidth").value);
-    var area = calculateRectangleProperties(Length,Width,'area');
-    var perimeter = calculateRectangleProperties(Length,Width, 'perimeter');
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem;
+            }
 
-    document.getElementById("spn").innerHTML = "Area of a Square: " + area + "<br>Perimeter of a Square: " + perimeter;
-}
+            input[type="button"] {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
 
-function calculateRectangleProperties(Length,Width, properties) {
-    switch (properties) {
-        case 'area':
-            return Length*Width;
-        case 'perimeter':
-            return 2*(Length+Width);
-        default:
-            return 'Invalid option';
-    }
-}
-function reset()
-{
-    document.getElementById("txtLength").value="0";
-    document.getElementById("txtWidth").value="0";
+            #spn {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
 
-}
+<body>
+    <div id="container">
+        <h1>Rectangle Calculator</h1>
+        <label for="txtLength">Length:</label>
+        <input type="text" id="txtLength" value="0" />
+        <label for="txtWidth">Width:</label>
+        <input type="text" id="txtWidth" value="0" />
+        <input type="button" value="Calculate" onclick="calculate()" />
+        <input type="button" value="Reset" onclick="reset()" />
+        <span id="spn"></span>
+    </div>
 
+    <script>
+        function calculate() {
+            var Length = Number(document.getElementById("txtLength").value);
+            var Width = Number(document.getElementById("txtWidth").value);
+            var area = calculateRectangleProperties(Length, Width, 'area');
+            var perimeter = calculateRectangleProperties(Length, Width, 'perimeter');
 
+            document.getElementById("spn").innerHTML =
+                `<strong>Area:</strong> ${area} <br> <strong>Perimeter:</strong> ${perimeter}`;
+        }
 
-            
+        function calculateRectangleProperties(Length, Width, properties) {
+            switch (properties) {
+                case 'area':
+                    return Length * Width;
+                case 'perimeter':
+                    return 2 * (Length + Width);
+                default:
+                    return 'Invalid option';
+            }
+        }
 
-        </script>
-    </body>
+        function reset() {
+            document.getElementById("txtLength").value = "0";
+            document.getElementById("txtWidth").value = "0";
+            document.getElementById("spn").innerHTML = "";
+        }
+    </script>
+</body>
+
 </html>
+
