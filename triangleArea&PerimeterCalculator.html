@@ -1,71 +1,179 @@
-<!Doctype html>
-<html>
-    <head>
-        <title>Area and Perimeter of a Traingle Using Heron's Formula</title>
-        <style>
-            #container{
-                background-color: grey;
-                width: 30%;
-                padding: 10px;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Area and Perimeter Calculator</title>
+    <style>
+        /* Global Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container Styling */
+        #container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 25px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            color: #ff7e5f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styling */
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ff7e5f;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #feb47b;
+        }
+
+        /* Button Styling */
+        input[type="button"] {
+            background-color: #ff7e5f;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: #feb47b;
+            transform: scale(1.05);
+        }
+
+        /* Output Styling */
+        #spn {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
             }
-        </style>
-    </head>
-    <body>
-        <div id="container">
-            <label>Traingle Area and Perimeter Calculator Using Heron's Formula</label><br><br>
-            <label>SideA</label>
-            <input type="text" id="txtSideA" value="0"/><br><br>
-            <label>SideB</label>
-            <input type="text" id="txtSideB" value="0"/><br><br>
-            <label>SideC</label>
-            <input type="text" id="txtSideC" value="0"/><br><br>
-            <input type="button"  value="calculate" onclick="calculate()"/>
-            <input type="button"  value="reset" onclick="reset()"/><br><br>
-            
-            
 
-         <span id="spn"></span>
+            input[type="button"] {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
 
-        
+            #spn {
+                font-size: 0.9rem;
+            }
+        }
 
-        </div>
-        <script type="text/javascript">
-            function calculate() {
-    var sideA = Number(document.getElementById("txtSideA").value);
-    var sideB = Number(document.getElementById("txtSideB").value);
-    var sideC = Number(document.getElementById("txtSideC").value);
-    var area = calculateCircleProperties(sideA,sideB,sideC, 'area');
-    var perimeter = calculateCircleProperties(sideA,sideB,sideC, 'perimeter');
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.3rem;
+            }
 
-    document.getElementById("spn").innerHTML = "Area of a Traingle: " + area + "<br>Perimeter of a Traingle: " + perimeter;
-}
+            input[type="button"] {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
 
-function calculateCircleProperties(sideA,sideB,sideC, properties) {
-    var S = (sideA + sideB + sideC) / 2;
+            #spn {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
 
-switch (properties) {
-    case 'area':
-         return Math.sqrt(S * (S - sideA) * (S - sideB) * (S- sideC));
+<body>
+    <div id="container">
+        <h1>Triangle Calculator</h1>
+        <label for="txtSideA">Side A:</label>
+        <input type="text" id="txtSideA" value="0" />
+        <label for="txtSideB">Side B:</label>
+        <input type="text" id="txtSideB" value="0" />
+        <label for="txtSideC">Side C:</label>
+        <input type="text" id="txtSideC" value="0" />
+        <input type="button" value="Calculate" onclick="calculate()" />
+        <input type="button" value="Reset" onclick="reset()" />
+        <span id="spn"></span>
+    </div>
 
-    case 'perimeter':
-        return (sideA + sideB + sideC);
-        break;
-    default:
-        console.log('Invalid properties. Please choose "area" or "perimeter".');
+    <script>
+        function calculate() {
+            var sideA = Number(document.getElementById("txtSideA").value);
+            var sideB = Number(document.getElementById("txtSideB").value);
+            var sideC = Number(document.getElementById("txtSideC").value);
 
-}
-}
+            if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+                document.getElementById("spn").innerHTML = "<strong>Error:</strong> All sides must be positive numbers.";
+                return;
+            }
 
-function reset()
-{
-    document.getElementById("txtSideA").value="0";
-    document.getElementById("txtSideB").value="0";
-    document.getElementById("txtSideC").value="0";
+            var area = calculateTriangleProperties(sideA, sideB, sideC, 'area');
+            var perimeter = calculateTriangleProperties(sideA, sideB, sideC, 'perimeter');
 
-}
+            document.getElementById("spn").innerHTML =
+                `<strong>Area:</strong> ${area.toFixed(2)} <br> <strong>Perimeter:</strong> ${perimeter}`;
+        }
 
-            
+        function calculateTriangleProperties(sideA, sideB, sideC, property) {
+            var S = (sideA + sideB + sideC) / 2;
 
-        </script>
-    </body>
+            switch (property) {
+                case 'area':
+                    return Math.sqrt(S * (S - sideA) * (S - sideB) * (S - sideC));
+                case 'perimeter':
+                    return sideA + sideB + sideC;
+                default:
+                    return 'Invalid property';
+            }
+        }
+
+        function reset() {
+            document.getElementById("txtSideA").value = "0";
+            document.getElementById("txtSideB").value = "0";
+            document.getElementById("txtSideC").value = "0";
+            document.getElementById("spn").innerHTML = "";
+        }
+    </script>
+</body>
+
 </html>
